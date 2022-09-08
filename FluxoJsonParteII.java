@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class FluxoJsaon {
+class FluxoJsonParteII {
     public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(new URI("https://imdb-api.com/en/API/Top250Movies/k_x8813nda")).GET().build();
@@ -20,25 +19,14 @@ class FluxoJsaon {
 
         List<String> listaFilmes = new ArrayList<>(Arrays.asList(listaFilmesJson));
 
-        List<String> listaTitulos = new ArrayList<>();
-        List<String> listaImagens = new ArrayList<>();
-        List<String> listaAnos = new ArrayList<>();
-        List<String> listaNotas = new ArrayList<>();
-
-
+        List<Movie> listaFilmesObjeto = new ArrayList<>();
+        
         for(String itemString: listaFilmes) {
             List<String> itemElemento = Arrays.asList(itemString.split(","));
-            listaTitulos.add(itemElemento.get(2));
-            listaImagens.add(itemElemento.get(5));
-            listaAnos.add(itemElemento.get(4));
-            listaNotas.add(itemElemento.get(12));
-        }
-
-        for(int i = 0; i <250; i++ ) {
-            System.out.println(listaTitulos.get(i) + "--" + listaImagens.get(i) + "--" + listaAnos.get(i) + "--" + listaNotas.get(i) + "\n");
+            listaFilmesObjeto.add(new Movie(itemElemento.get(2), itemElemento.get(5), itemElemento.get(12), itemElemento.get(4)));
         }
         
-        
+        listaFilmesObjeto.forEach((item) -> {System.out.println(item + "\n");});
         
        
     }
