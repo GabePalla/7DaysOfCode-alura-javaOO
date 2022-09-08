@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -26,7 +27,16 @@ class FluxoJsonParteII {
             listaFilmesObjeto.add(new Movie(itemElemento.get(2), itemElemento.get(5), itemElemento.get(12), itemElemento.get(4)));
         }
         
-        listaFilmesObjeto.forEach((item) -> {System.out.println(item + "\n");});
+        HTMLGenerator htmlGenerator = new HTMLGenerator(new FileWriter("index.html"));
+        for (Movie movie : listaFilmesObjeto) {
+            htmlGenerator.generate(movie);
+
+        }
+        htmlGenerator.getWriter().close();
+        
+
+
+        // listaFilmesObjeto.forEach((item) -> {System.out.println(item + "\n");});
         
        
     }

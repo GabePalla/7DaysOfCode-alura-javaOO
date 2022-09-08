@@ -30,7 +30,7 @@ public class Movie {
 
     @Override
     public String toString() {
-        return this.titulo.substring(9, this.titulo.length() - 1);
+        return this.titulo;
     }
 
 }
