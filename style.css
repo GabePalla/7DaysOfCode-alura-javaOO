@@ -1,0 +1,14 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: rgba(201, 182, 214, 0.678);
+}
+
+#movies {
+    text-align: center;
+}
+
+#image {
+    width: 300px;
+    height: 450px;
+}

@@ -16,22 +16,40 @@ public class HTMLGenerator {
         return writer;
     }
 
-    public void generate(Movie movie) throws IOException {
-
-        String html = """
+    
+    public void generate(List<Movie> movie) throws IOException {
+        String abreHtmlString = """
                 <html>
                     <head>
                         <meta charset="utf-8">
+                        <link rel="stylesheet" href="style.css">
                     </head>
+
                     <body>
-                        <h1>%s</h1>
-                        <img src=>
-                        <img
+                """;
+        writer.write(abreHtmlString);
+
+        for (Movie movieItem : movie) {
+            String body = """
+                            <article id="movies">
+                                <h1 id="titulo">%s</h1>
+                                <img src="%s" id="image">
+                                <p id="texto">Nota: %s - Ano: %s</p>
+                            </article>
+
+                    """.formatted(movieItem.getTitulo(), movieItem.getUrlImage(), movieItem.getNota(), movieItem.getAno());
+
+            writer.write(body);
+        }
+
+        String fechaHtmlString = """
                     </body>
                 </html>
-                """.formatted(movie.getTitulo());
+                """;
+        writer.write(fechaHtmlString);
 
-        writer.append(html);
+        writer.close();
+
         
     }
 }

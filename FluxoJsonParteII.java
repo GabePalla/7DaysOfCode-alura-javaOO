@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 class FluxoJsonParteII {
     public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
@@ -21,18 +22,19 @@ class FluxoJsonParteII {
         List<String> listaFilmes = new ArrayList<>(Arrays.asList(listaFilmesJson));
 
         List<Movie> listaFilmesObjeto = new ArrayList<>();
+
         
         for(String itemString: listaFilmes) {
-            List<String> itemElemento = Arrays.asList(itemString.split(","));
-            listaFilmesObjeto.add(new Movie(itemElemento.get(2), itemElemento.get(5), itemElemento.get(12), itemElemento.get(4)));
+            List<String> itemElemento = Arrays.asList(itemString.split("\",\""));
+            listaFilmesObjeto.add(new Movie(itemElemento.get(2).substring(8), 
+                itemElemento.get(5).substring(8), 
+                itemElemento.get(7).substring(13), 
+                itemElemento.get(4).substring(7)));
         }
         
         HTMLGenerator htmlGenerator = new HTMLGenerator(new FileWriter("index.html"));
-        for (Movie movie : listaFilmesObjeto) {
-            htmlGenerator.generate(movie);
+        htmlGenerator.generate(listaFilmesObjeto);
 
-        }
-        htmlGenerator.getWriter().close();
         
 
 
