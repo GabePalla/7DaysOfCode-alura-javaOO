@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-public class ImdbMovieJsonParser {
+public class ImdbMovieJsonParser implements JsonParser{
         String response;
-        List<Movie> list;
+        List<Content> list;
 
     ImdbMovieJsonParser(String response) {
         this.response = response;
         this.list = new ArrayList<>();
     }
-
-    public List<Movie> parse() {
+    
+    @Override
+    public List<Content> parse() {
         String[] listaFilmesJson = response.substring(11, response.length() - 21).split("\\},\\{");
         List<String> listaFilmes = new ArrayList<>(Arrays.asList(listaFilmesJson));
 
@@ -22,6 +24,7 @@ public class ImdbMovieJsonParser {
                 itemElemento.get(7).substring(13), 
                 itemElemento.get(4).substring(7)));
         }
+        Collections.sort(list);
         return list;
     }
 }

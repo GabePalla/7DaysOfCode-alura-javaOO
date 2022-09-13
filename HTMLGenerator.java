@@ -16,7 +16,7 @@ public class HTMLGenerator {
     }
 
     
-    public void generate(List<Movie> movie) throws IOException {
+    public void generate(List<Content> movie) throws IOException {
         String abreHtmlString = """
                 <html>
                     <head>
@@ -31,7 +31,7 @@ public class HTMLGenerator {
                 """;
         writer.write(abreHtmlString);
 
-        for (Movie movieItem : movie) {
+        for (Content movieItem : movie) {
             String body = """
                             <article id="movies">
                                 <h1 id="titulo">%s</h1>
@@ -39,7 +39,7 @@ public class HTMLGenerator {
                                 <p id="texto">Nota: %s - Ano: %s</p>
                             </article>
 
-                    """.formatted(movieItem.getTitulo(), movieItem.getUrlImage(), movieItem.getNota(), movieItem.getAno());
+                    """.formatted(movieItem.Titulo(), movieItem.UrlImage(), movieItem.Nota(), movieItem.Ano());
 
             writer.write(body);
         }
